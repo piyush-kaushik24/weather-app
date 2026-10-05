@@ -38,7 +38,7 @@ Users should be able to:
 ### Links
 
 - Solution URL: [GitHub](https://github.com/piyush-kaushik24/weather-app)
-- Live Site URL: [Weather app](<>)
+- Live Site URL: [Weather app](https://weather-app-delta-black-82.vercel.app/)
 
 ## My process
 
