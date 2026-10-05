@@ -80,7 +80,11 @@ export const WeatherView = ({ unitsDisplay }: WeatherViewProp) => {
       </div>
       <div className="flex flex-col gap-6 xl:flex-row xl:justify-center">
         <div className="grid gap-6">
-          <WeatherHero weather={weather} loadingWeather={loadingWeather} />
+          <WeatherHero
+            weather={weather}
+            loadingWeather={loadingWeather}
+            unitsDisplay={unitsDisplay}
+          />
           <WeatherAside
             weather={weather}
             loadingWeather={loadingWeather}

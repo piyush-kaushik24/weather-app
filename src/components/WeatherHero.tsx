@@ -1,17 +1,21 @@
+import type { Units } from "../App";
 import { bgTodayLarge, bgTodaySmall } from "../assets";
 import type { Weather } from "../types/types";
+import { celsiusToFahrenheit } from "../utils/units";
 import { HeroSkeleton } from "./skeletons/HeroSkeleton";
 import { getWeatherIcon } from "./WeatherIcons";
 
 type WeatherHeroProps = {
   weather: Weather | null;
   loadingWeather: boolean;
+    unitsDisplay: Units;
 };
 
-export const WeatherHero = ({ weather, loadingWeather }: WeatherHeroProps) => {
+export const WeatherHero = ({ weather, loadingWeather,unitsDisplay }: WeatherHeroProps) => {
   if (!weather) {
     return <HeroSkeleton loadingWeather={loadingWeather} />;
   }
+ 
 
   const date = new Date(weather.current.time);
 
@@ -21,6 +25,10 @@ export const WeatherHero = ({ weather, loadingWeather }: WeatherHeroProps) => {
     day: "numeric",
     year: "numeric",
   });
+      const currentTemperature =
+        unitsDisplay.Temperature === "Fahrenheit(°F)"
+          ? celsiusToFahrenheit(weather.current.apparent_temperature)
+          : weather.current.apparent_temperature;
 
   return (
     <section className="relative h-75">
@@ -36,9 +44,7 @@ export const WeatherHero = ({ weather, loadingWeather }: WeatherHeroProps) => {
             alt=""
             className="w-30"
           />
-          <p className="text-8xl italic">
-            {Math.round(weather.current.temperature_2m)}°
-          </p>
+          <p className="text-8xl italic">{Math.round(currentTemperature)}°</p>
         </div>
       </div>
       <picture>
