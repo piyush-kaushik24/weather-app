@@ -1,0 +1,36 @@
+@import "tailwindcss";
+
+@theme {
+  /* Neutral */
+  --color-background: hsl(243 96% 9%);
+  --color-surface: hsl(243 27% 20%);
+  --color-surface-elevated: hsl(243 23% 24%);
+  --color-border: hsl(243 23% 30%);
+  --color-text-secondary: hsl(240 6% 70%);
+  --color-text-muted: hsl(250 6% 84%);
+  --color-text: hsl(0 0% 100%);
+
+  /* Brand */
+  --color-primary: hsl(28 100% 52%);
+
+  /* Blue */
+  --color-accent: hsl(233 67% 56%);
+  --color-accent-dark: hsl(248 70% 36%);
+
+  /* Fonts */
+
+  --font-sans: "DM Sans", sans-serif;
+  --font-display: "Bricolage Grotesque", sans-serif;
+}
+body {
+  font-family: var(--font-sans);
+  background-color: var(--color-background);
+  color: var(--color-text);
+}
+.scrollbar-hidden {
+  scrollbar-width: none;
+}
+
+.scrollbar-hidden::-webkit-scrollbar {
+  display: none;
+}
