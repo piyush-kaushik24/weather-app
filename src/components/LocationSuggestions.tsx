@@ -1,5 +1,7 @@
+import { useEffect, useRef } from "react";
 import type { Locations } from "../types/types";
 import { Loading } from "./Loading";
+import { ErrorSuggestions } from "./skeletons/ErrorSuggestions";
 
 type LocationSuggestionsProps = {
   locations: Locations[];
@@ -9,6 +11,7 @@ type LocationSuggestionsProps = {
   onClickSuggestion: (status: boolean) => void;
   isClicked: boolean;
   onSearchWeather: (weather: null) => void;
+  debounceSearch: string;
 };
 export const LocationSuggestions = ({
   locations,
@@ -18,12 +21,34 @@ export const LocationSuggestions = ({
   onClickSuggestion,
   onSearchWeather,
   isClicked,
+  debounceSearch,
 }: LocationSuggestionsProps) => {
+  const suggestionsRef = useRef<HTMLDivElement | null>(null);
+  useEffect(() => {
+    function handleClick(e: MouseEvent) {
+      if (!suggestionsRef.current?.contains(e.target as Node)) {
+        onClickSuggestion(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClick);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClick);
+    };
+  }, [onClickSuggestion]);
+
   return (
-    <div className="bg-surface scrollbar-hidden absolute top-full z-30 max-h-75 w-full translate-y-2 overflow-y-auto rounded-xl">
+    <div
+      ref={suggestionsRef}
+      className="bg-surface scrollbar-hidden absolute top-full z-30 max-h-75 w-full translate-y-2 overflow-y-auto rounded-xl"
+    >
       {isClicked && search.length > 0 ? (
         <>
           {loading && <Loading />}
+          {!loading &&
+            locations.length === 0 &&
+            debounceSearch === search &&
+            debounceSearch.trim() !== "" && <ErrorSuggestions />}
           <ul>
             {locations.map((items) => (
               <li key={items.id} className="border-border border-b">

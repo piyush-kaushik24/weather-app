@@ -16,14 +16,14 @@ type WeatherViewProp = {
 };
 export const WeatherView = ({ unitsDisplay }: WeatherViewProp) => {
   const { getPlace, value: locations, error, loading } = useFetch();
- const {
-   getWeather,
-   weather,
-   setWeather,
-   loading: loadingWeather,
-   error: weatherError,
-   lastLocation,
- } = useFetchWeather();
+  const {
+    getWeather,
+    weather,
+    setWeather,
+    loading: loadingWeather,
+    error: weatherError,
+    lastLocation,
+  } = useFetchWeather();
 
   const [isClicked, setIsClicked] = useState(true);
   const [search, setSearch] = useState("");
@@ -42,6 +42,7 @@ export const WeatherView = ({ unitsDisplay }: WeatherViewProp) => {
   function handleWeatherStatus(weather: null) {
     setWeather(weather);
   }
+
   if (error) {
     return (
       <Error
@@ -74,6 +75,7 @@ export const WeatherView = ({ unitsDisplay }: WeatherViewProp) => {
           isClicked={isClicked}
           getWeather={getWeather}
           onSearchWeather={handleWeatherStatus}
+          debounceSearch={debounceSearch}
         />
       </div>
       <div className="flex flex-col gap-6 xl:flex-row xl:justify-center">
