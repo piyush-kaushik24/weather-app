@@ -50,7 +50,7 @@ export const DailyForecast = ({
             return (
               <li
                 key={date}
-                className="bg-surface border-border flex flex-col items-center gap-4 rounded-xl border p-4"
+                className="bg-surface card-action border-border flex flex-col items-center gap-4 rounded-xl border p-4"
               >
                 <p className="text-center">{day}</p>
                 <div className="bg-background rounded-full">

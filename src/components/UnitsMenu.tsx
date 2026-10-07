@@ -1,4 +1,3 @@
-import { useEffect, useRef } from "react";
 import type { Units } from "../App";
 import { iconCheckmark } from "../assets";
 
@@ -7,13 +6,13 @@ type UnitType = "Temperature" | "Wind Speed" | "Precipitation";
 type UnitsMenuProps = {
   unitsDisplay: Units;
   onChangeUnit: (unit: Units) => void;
-  onClick: (status: boolean) => void;
+  isOpen: boolean;
 };
 
 export const UnitsMenu = ({
   unitsDisplay,
+  isOpen,
   onChangeUnit,
-  onClick,
 }: UnitsMenuProps) => {
   const units: {
     name: UnitType;
@@ -50,24 +49,10 @@ export const UnitsMenu = ({
       });
     }
   }
-  const unitsMenuRef = useRef<HTMLDivElement | null>(null);
-
-  useEffect(() => {
-    function handleClick(e: MouseEvent) {
-      if (!unitsMenuRef.current?.contains(e.target as Node)) {
-        onClick(false);
-      }
-    }
-    document.addEventListener("mousedown", handleClick);
-    return () => {
-      document.removeEventListener("mousedown", handleClick);
-    };
-  }, [onClick]);
 
   return (
     <div
-      ref={unitsMenuRef}
-      className="bg-surface border-border absolute top-full right-0 z-20 w-70 translate-y-4 rounded-xl border-2 p-2"
+      className={`menu ${isOpen ? "open" : ""} bg-surface border-border absolute top-full right-0 z-20 w-70 translate-y-4 rounded-xl border-2 p-2`}
     >
       <button
         type="button"

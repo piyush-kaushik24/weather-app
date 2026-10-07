@@ -1,9 +1,14 @@
 type hourlyFilterProps = {
   onFilter: (day: string) => void;
   onClick: (status: boolean) => void;
+  isOpen: boolean;
 };
 
-export const HourlyFilter = ({ onFilter, onClick }: hourlyFilterProps) => {
+export const HourlyFilter = ({
+  onFilter,
+  onClick,
+  isOpen,
+}: hourlyFilterProps) => {
   type HourlyFilter =
     | "Today"
     | "Monday"
@@ -26,7 +31,9 @@ export const HourlyFilter = ({ onFilter, onClick }: hourlyFilterProps) => {
   ];
 
   return (
-    <ul className="bg-surface border-border absolute top-full right-0 w-50 translate-y-2 rounded-xl border px-4">
+    <ul
+      className={`menu ${isOpen ? "open" : ""} bg-surface border-border absolute top-full z-30 right-0 w-50 translate-y-2 rounded-xl border px-4`}
+    >
       {hourlyFilter.map((item) => (
         <li key={item} className="py-2">
           <button

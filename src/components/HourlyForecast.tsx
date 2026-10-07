@@ -80,14 +80,17 @@ export const HourlyForecast = ({
             type="button"
             aria-expanded={isOpen}
             onClick={() => setIsOpen(!isOpen)}
-            className="bg-surface-elevated flex cursor-pointer gap-4 rounded-xl px-4 py-2"
+            className="bg-surface-elevated button flex cursor-pointer gap-4 rounded-xl px-4 py-2"
           >
             <span>{filterHourly}</span>
             <img src={iconDropdown} alt="" />
           </button>
-          {isOpen ? (
-            <HourlyFilter onFilter={handleFilter} onClick={handleClick} />
-          ) : null}
+
+          <HourlyFilter
+            onFilter={handleFilter}
+            onClick={handleClick}
+            isOpen={isOpen}
+          />
         </div>
       </div>
       <ul className="scrollbar-hidden grid max-h-145 gap-4 overflow-auto">
@@ -100,7 +103,7 @@ export const HourlyForecast = ({
           return (
             <li
               key={date}
-              className="bg-surface-elevated border-border flex items-center justify-between rounded-xl border p-4"
+              className="bg-surface-elevated hourly-card border-border flex items-center justify-between rounded-xl border p-4"
             >
               <div className="flex items-center gap-4">
                 <div className="bg-surface rounded-full">

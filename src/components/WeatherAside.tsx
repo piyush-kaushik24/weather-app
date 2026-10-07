@@ -17,7 +17,7 @@ export const WeatherAside = ({
   }
   const {
     current: {
-      apparent_temperature,
+      temperature_2m,
       relative_humidity_2m,
       wind_speed_10m,
       precipitation,
@@ -25,8 +25,8 @@ export const WeatherAside = ({
   } = weather;
   const currentTemperature =
     unitsDisplay.Temperature === "Fahrenheit(°F)"
-      ? celsiusToFahrenheit(apparent_temperature)
-      : apparent_temperature;
+      ? celsiusToFahrenheit(temperature_2m)
+      : temperature_2m;
   const windSpeed =
     unitsDisplay["Wind Speed"] === "mph"
       ? kmhToMph(wind_speed_10m)
@@ -65,7 +65,7 @@ export const WeatherAside = ({
         {weatherDetails.map(({ title, value, unit }) => (
           <li
             key={title}
-            className="bg-surface border-border flex flex-col gap-4 rounded-xl border p-4"
+            className="bg-surface card-action border-border flex flex-col gap-4 rounded-xl border p-4"
           >
             <p className="text-text-muted">{title}</p>
             <div className="flex gap-2 text-3xl">
